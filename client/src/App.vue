@@ -1,32 +1,33 @@
 <template>
   <div>
-    <input type="text" v-model="address" placeholder="Введите адрес">
-    <button @click="geocodeAddress">Найти координаты</button>
-    <div v-if="coordinates">
-      Широта: {{ coordinates.latitude }}
-      Долгота: {{ coordinates.longitude }}
-    </div>
+    <iframe src="https://176.99.128.10/embed/10" width="597" height="337" frameborder="0"></iframe>
+  </div>
+  <div>
+    <iframe src="https://176.99.128.10/embed/7" width="597" height="337" frameborder="0"></iframe>
+  </div>
+  <div>
+    <iframe src="https://176.99.128.10/embed/1" width="597" height="337" frameborder="0"></iframe>
   </div>
 </template>
 
 <script>
-import { geocode } from './geOps.js/main';
-
 export default {
-  data() {
-    return {
-      address: '',
-      coordinates: null,
-    };
-  },
+  // mounted() {
+  //   this.startVideoStream();
+  // },
   methods: {
-    async geocodeAddress() {
-      try {
-        const response = await geocode(this.address);
-        this.coordinates = response.results[0].geometry.coordinates;
-      } catch (error) {
-        // Обработка ошибок
-      }
+    startVideoStream() {
+      const socket = new WebSocket('ws://localhost:8000/video-stream');
+
+      // Обработка полученных данных через WebSocket
+      socket.onmessage = (event) => {
+        const videoPlayer = this.$refs.videoPlayer;
+
+        // Обновление src объекта videoPlayer для отображения видеопотока
+        if (videoPlayer.src === '') {
+          videoPlayer.srcObject = event.data;
+        }
+      };
     },
   },
 };
