@@ -1,6 +1,6 @@
 <template>
     <div class="header">
-        <div class="name-site">vkaolimp</div>
+        <div class="name-site">RZD</div>
         <div class="right-side">
             <div class="sigin-button-wrap">
             </div>
@@ -14,18 +14,6 @@
 
 export default{
     name: 'Header_RZD',
-    
-    computed:{
-        isSatartPage(){
-            return this.$route.name == 'start'
-        },
-        isRegisterPage(){
-            return this.$route.name == 'registration'
-        },
-        isSigInpage(){
-            return this.$route.name == 'sign'
-        }
-    }
 }
 
 </script>
@@ -37,7 +25,7 @@ export default{
   display: flex;
   justify-content: space-between;
 
-  background: #18181C;
+  background: #970f0f;
   /* box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.1); */
   border-bottom: 2px solid #646262
 }

@@ -1,7 +1,7 @@
 <template>
 <div class="main-page">
     <Header_RZD/>
-    <div>
+    <div class="wrapper">
         <div ref="map" class="map"></div>
     </div>
     <div class="log-info">
@@ -10,7 +10,7 @@
 
         </dif>
         <div class="right-side">
-
+          <video ref="videoPlayer" controls autoplay></video>
         </div>
     </div>
 </div>
@@ -30,8 +30,15 @@ export default{
     },
     mounted() {
   this.initMap();
+  this.loadVideoStream();
 },
     methods: {
+      loadVideoStream() {
+      const videoElement = this.$refs.videoPlayer;
+      const videoUrl = "http://localhost:8000/video-stream"; // Update with your FastAPI server URL
+
+      videoElement.src = videoUrl;
+    },
     initMap() {
       const map = new Map({
         target: this.$refs.map,
@@ -67,20 +74,26 @@ export default{
           features: [marker]
         })
       });
-      
       map.addLayer(vectorLayer);
     },
-
-  }
+  },
+  
 };
 </script>
 
 
 
 <style>
+.wrapper{
+  margin-top: 1%;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: center
+}
 .map {
-  width: 100%;
-  height: 400px; /* Измените высоту по своему усмотрению */
+  width: 90%;  
+  height: 500px; /* Измените высоту по своему усмотрению */
 }
 .main-page {
   flex: 1;
