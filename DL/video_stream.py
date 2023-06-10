@@ -11,7 +11,7 @@ def get_video_stream():
         ret, frame = cap.read()
         print(ret)
         print(frame)
-        
+        pass
         if not ret:
             # Если не удалось прочитать кадр, выход из цикла
             break
